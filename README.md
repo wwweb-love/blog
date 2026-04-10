@@ -19,6 +19,7 @@ docker-compose up -d --build
 
 // Зайди в контейнер MongoDB
 docker exec -it mongodb mongosh -u admin -p secret123 --authenticationDatabase admin
+
 // Переключись на нужную БД (mydb)
 use mydb
 // Посмотрим всех пользователей
