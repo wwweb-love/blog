@@ -1,6 +1,21 @@
 
 local: http://localhost:3000
 VPS: http://46.229.212.69:3000/
+
+
+-------------------------------------------VPS
+
+ssh root@46.229.212.69
+pass: 
+docker ps
+cd ./blog/backend
+nano .env
+...editing
+Ctrl + O (Save)
+...naming 
+Ctrl + X (Exit)
+docker-compose up -d --build
+
 -------------------------------------------NODE_JS
 
 cd ./backend
