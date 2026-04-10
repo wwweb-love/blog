@@ -1,6 +1,6 @@
 
 local: http://localhost:3000
-
+VPS: http://46.229.212.69:3000/
 -------------------------------------------NODE_JS
 
 cd ./backend
