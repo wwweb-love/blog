@@ -15,6 +15,24 @@ Ctrl + O (Save)
 Ctrl + X (Exit)
 docker-compose up -d --build
 
+# Mongo_DB
+
+// Зайди в контейнер MongoDB
+docker exec -it mongodb mongosh -u admin -p secret123 --authenticationDatabase admin
+// Переключись на нужную БД (mydb)
+use mydb
+// Посмотрим всех пользователей
+db.users.find().pretty()
+// Или по login
+db.users.updateOne(
+  { login: "login" }, 
+  { $set: { role: role } }
+)
+// Проверим что обновилось
+db.users.find().pretty()
+// Выйти
+exit
+
 # NODE_JS
 cd ./backend
 npm run dev 
