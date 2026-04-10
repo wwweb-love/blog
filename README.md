@@ -1,10 +1,9 @@
+# Network 
 
 local: http://localhost:3000
 VPS: http://46.229.212.69:3000/
 
-
--------------------------------------------VPS
-
+# VPS
 ssh root@46.229.212.69
 pass: 
 docker ps
@@ -16,13 +15,11 @@ Ctrl + O (Save)
 Ctrl + X (Exit)
 docker-compose up -d --build
 
--------------------------------------------NODE_JS
-
+# NODE_JS
 cd ./backend
 npm run dev 
 
--------------------------------------------DOCKER
-
+# DOCKER
 Надо создать docker-compose.yml, который позволит запустить несколько приложений (Node JS, MongoDB)
 version: '3.8'
 
@@ -73,34 +70,35 @@ FROM node:24
 
 WORKDIR /usr/src/app
 
-# Копируем package.json файлы для кеширования слоев
+// Копируем package.json файлы для кеширования слоев
 COPY backend/package*.json ./backend/
 COPY frontend/package*.json ./frontend/
 
-# Устанавливаем зависимости
+// Устанавливаем зависимости
 WORKDIR /usr/src/app/frontend
 RUN npm ci
 
 WORKDIR /usr/src/app/backend
 RUN npm ci
 
-# Копируем весь код
+// Копируем весь код
 WORKDIR /usr/src/app
 COPY . .
 
-# Собираем фронтенд
+// Собираем фронтенд
 WORKDIR /usr/src/app/frontend
 RUN npm run build
 
-# Устанавливаем wait-for-it для ожидания БД
+// Устанавливаем wait-for-it для ожидания БД
 WORKDIR /usr/src/app/backend
 RUN apt-get update && apt-get install -y wait-for-it && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 3000
 
-# Ждем MongoDB, затем запускаем
+// Ждем MongoDB, затем запускаем
 CMD wait-for-it mongodb:27017 -- node app.js
 
+# .env
 Использовать .env для скрытия важных ключей
 DB_CONNECTION_STRING=mongodb://admin:secret123@mongodb:27017/mydb?authSource=admin
 JWT_SECRET=testtest
@@ -108,11 +106,11 @@ JWT_SECRET=testtest
 require(“dotenv”).config()
 process.env.DB_CONNECTION_STRING
 Команда для запуска Docker 
-# Остановить старые контейнеры если есть
+// Остановить старые контейнеры если есть
 Docker-compose down
-# Собрать и запустить
+// Собрать и запустить
 Docker-compose up –build
-# Для фонового режима
+// Для фонового режима
 Docker-compose up -d –build
-# Посмотреть логи
+// Посмотреть логи
 Docker-compose logs -f 
