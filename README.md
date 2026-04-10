@@ -98,7 +98,7 @@ services:
       mongodb:
         condition: service_healthy
     environment:
-      - DB_CONNECTION_STRING=mongodb://admin:secret123@mongodb:27017/mydb?authSource=admin
+      - DB_CONNECTION_STRING=mongodb://user:pass@mongodb:27017/mydb?authSource=admin
     networks:
       - app-network
 
